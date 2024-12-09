@@ -1,0 +1,10 @@
+test:
+  frontend:
+    image: node:20
+    context: frontend
+    caches:
+      - yarn/.cache
+      - node_modules
+    commands:
+      - yarn install
+      - yarn test

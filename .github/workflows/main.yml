@@ -1,8 +1,8 @@
 on: [push]
-
+name: okteto-test-action
 jobs:
-  run-graphql-tests:
-      runs-on: arc-runners-large
+  run-tests:
+      runs-on: ubuntu-latest
       steps:
   
         - name: Checkout repository

@@ -1,0 +1,24 @@
+on: [push]
+
+jobs:
+  run-graphql-tests:
+      runs-on: arc-runners-large
+      steps:
+  
+        - name: Checkout repository
+          uses: actions/checkout@v3
+  
+        - name: Okteto login
+          uses: okteto/context@latest
+          with:
+            token: ${{ secrets.OKTETO_TOKEN }}
+            url: ${{ secrets.OKTETO_CONTEXT }}
+  
+        - name: Save Git values
+          run: |
+            echo "COMMIT_INFO_MESSAGE=\"$(git show -s --format='%s')\"" >> $GITHUB_ENV
+  
+        - name: Run graphql tests
+          uses: okteto/test@latest
+          with:
+            file: okteto.yml

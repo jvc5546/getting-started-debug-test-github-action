@@ -8,9 +8,6 @@ jobs:
     container:
       image: okteto/okteto:stable
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
       - name: Okteto login
         uses: okteto/context@latest
         with:

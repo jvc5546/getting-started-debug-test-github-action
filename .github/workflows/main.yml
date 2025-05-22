@@ -3,6 +3,8 @@ name: okteto-test-action
 jobs:
   run-tests:
       runs-on: ubuntu-latest
+      env:
+        EVENT_NUMBER: ${{github.run_id}}
       steps:
         - name: Checkout repository
           uses: actions/checkout@v3
@@ -16,7 +18,7 @@ jobs:
         - name: Create Preview Environment Namespace
           uses: okteto/create-namespace@latest
           with:
-            namespace: dev-previews-test${{ github.event.number }}
+            namespace: dev-previews-test$EVENT_NUMBER
 
         - name: Run tests
           uses: okteto/test@latest
@@ -27,4 +29,4 @@ jobs:
           uses: okteto/deploy-preview@latest
           with:
             file: okteto.yml
-            name: dev-previews-test${{ github.event.number }}
+            name: dev-previews-test$EVENT_NUMBER

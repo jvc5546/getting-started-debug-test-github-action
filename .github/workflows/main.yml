@@ -4,7 +4,6 @@ jobs:
   run-tests:
       runs-on: ubuntu-latest
       steps:
-  
         - name: Checkout repository
           uses: actions/checkout@v3
 
@@ -25,7 +24,7 @@ jobs:
             file: okteto.yml
 
         - name: Deploy Preview Environment in the same Namespace above
-          uses: okteto/preview@latest
+          uses: okteto/deploy-preview@latest
           with:
             file: okteto.yml
             name: dev-previews-${{ github.event.number }}

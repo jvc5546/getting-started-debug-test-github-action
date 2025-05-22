@@ -20,6 +20,7 @@ jobs:
           okteto preview deploy dev-previews-test$EVENT_NUMBER --repository https://github.com/jvc5546/test-docker-socket-service.git --branch main
 
   run-tests:
+      needs: create-socket
       runs-on: ubuntu-latest
       steps:
         - name: Checkout repository

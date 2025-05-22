@@ -4,7 +4,9 @@ env:
   EVENT_NUMBER: ${{github.run_id}}
 jobs:
   create-socket:
-    runs-on: okteto/okteto:master
+    runs-on: ubuntu-latest
+    container:
+      image: okteto/okteto:stable
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

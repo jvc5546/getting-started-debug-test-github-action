@@ -7,14 +7,25 @@ jobs:
   
         - name: Checkout repository
           uses: actions/checkout@v3
-  
+
         - name: Okteto login
           uses: okteto/context@latest
           with:
             token: ${{ secrets.OKTETO_TOKEN }}
             url: ${{ secrets.OKTETO_CONTEXT }}
 
-        - name: Run graphql tests
+        - name: Create Preview Environment Namespace
+          uses: okteto/create-namespace@latest
+          with:
+            namespace: dev-previews-${{ github.event.number }}
+
+        - name: Run tests
           uses: okteto/test@latest
           with:
             file: okteto.yml
+
+        - name: Deploy Preview Environment in the same Namespace above
+          uses: okteto/preview@latest
+          with:
+            file: okteto.yml
+            name: dev-previews-${{ github.event.number }}

@@ -41,3 +41,18 @@ jobs:
           with:
             file: okteto.yml
             name: dev-previews-test$EVENT_NUMBER
+
+  delete-socket:
+    runs-on: ubuntu-latest
+    container:
+      image: okteto/okteto:stable
+    steps:
+      - name: Okteto login
+        uses: okteto/context@latest
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+          url: ${{ secrets.OKTETO_CONTEXT }}
+
+      - name: Delete Docker socket service from Preview Environment Namespace
+        run: 
+          okteto destroy test-docker-socket-service --namespace dev-previews-test$EVENT_NUMBER

@@ -16,7 +16,7 @@ jobs:
 
       - name: Create Preview Environment Namespace for Docker socket service
         run: 
-          okteto preview deploy dev-previews-test$EVENT_NUMBER --repository https://github.com/jvc5546/test-docker-socket-service.git --branch main
+          okteto preview deploy dev-previews-test-$EVENT_NUMBER --repository https://github.com/jvc5546/test-docker-socket-service.git --branch main
 
   run-tests:
       needs: create-socket
@@ -56,4 +56,4 @@ jobs:
 
       - name: Delete Docker socket service from Preview Environment Namespace
         run: 
-          okteto destroy --name test-docker-socket-service --namespace dev-previews-test$EVENT_NUMBER
+          okteto destroy --name test-docker-socket-service --namespace dev-previews-test-$EVENT_NUMBER
